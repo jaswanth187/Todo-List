@@ -167,17 +167,26 @@ const App = () => {
     localStorage.clear();
     navigate("/login");
   };
+  const handleLogin = () => {
+    navigate("/login");
+  };
 
   const completedTodos = todos.filter((todo) => todo.completed);
   const incompleteTodos = todos.filter((todo) => !todo.completed);
-
+  const isLoggedIn = localStorage.getItem("loggedIn") === "true";
   return (
     <>
       <nav className="d-flex w-100">
         <h1 className="m-3 h4">Todo App</h1>
-        <button className="btn ms-auto btn-dark m-3 " onClick={handleLogout}>
-          Logout
-        </button>
+        {isLoggedIn ? (
+          <button className="btn ms-auto btn-dark m-3" onClick={handleLogout}>
+            Logout
+          </button>
+        ) : (
+          <button className="btn ms-auto btn-dark m-3" onClick={handleLogin}>
+            Login
+          </button>
+        )}
       </nav>
       <Container>
         <h1 className="mt-4">
