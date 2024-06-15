@@ -14,6 +14,12 @@ const Login = ({ setLoggedIn }) => {
   };
 
   const authLogin = async () => {
+    // check if username is password are not empty
+    if (!username || !password) {
+      alert("username and password are required");
+      return;
+    }
+
     try {
       console.log("Login");
       const response = await fetch("http://localhost:8000/login", {
@@ -23,12 +29,16 @@ const Login = ({ setLoggedIn }) => {
         },
         body: JSON.stringify({ username, password }),
       });
-
+      const data = await response.json();
       if (response.ok) {
-        alert("Login Success");
-        localStorage.setItem("loggedIn", true);
-        localStorage.setItem("username", username);
-        navigate("/");
+        if (data.user) {
+          alert("Login Success");
+          localStorage.setItem("loggedIn", true);
+          localStorage.setItem("username", username);
+          navigate("/");
+        } else {
+          alert("somthing went wrong try later");
+        }
       }
     } catch (error) {
       console.error("Error logging in:", error);

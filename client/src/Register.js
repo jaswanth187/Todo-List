@@ -12,7 +12,10 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    if (!username || !password || !confirmPassword) {
+      alert("Fill the details");
+      return;
+    }
     // Validate password and confirm password match
     if (password !== confirmPassword) {
       setError("Passwords do not match.");
@@ -26,6 +29,7 @@ const Register = () => {
       });
       console.log("Register response:", response.data);
       if (response.status >= 200 && response.status < 300) {
+        alert("registration successful");
         navigate("/");
         localStorage.setItem("loggedIn", true);
         localStorage.setItem("username", username);

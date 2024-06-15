@@ -113,8 +113,8 @@ app.get("/todos/:id", async (req, res) => {
 
 app.put("/todos/:id", async (req, res) => {
   const { id } = req.params;
-  const { title, description, due_date } = req.body;
-  console.log("PUT AND EDIT TODO", title, description, due_date, id);
+  const { title, description, due_date, completed } = req.body; // Make sure completed is included
+  console.log("PUT AND EDIT TODO", title, description, due_date, completed, id);
 
   try {
     const result = await pool.query(

@@ -13,7 +13,7 @@ import {
 import "./App.css";
 import { useNavigate } from "react-router-dom";
 
-const App = () => {
+const Hero = () => {
   const navigate = useNavigate();
   const [todos, setTodos] = useState([]);
   const [formData, setFormData] = useState({
@@ -79,13 +79,10 @@ const App = () => {
   };
 
   const handleUpdate = (id) => {
-    console.log(id, "id");
-    const todo = todos.find((todo) => todo.task_id === id);
-    console.log(todo, "todo");
-    console.log(todos, "todos");
+    const todo = todos.find((todo) => todo.task_id === id); // Ensure you're using the correct key, `task_id`
     if (todo) {
       setEditedTodo({
-        id: todo.id,
+        id: todo.task_id, // Make sure to use the correct key
         title: todo.title,
         description: todo.description,
         due_date: todo.due_date,
@@ -111,12 +108,11 @@ const App = () => {
   const handleSave = async (e) => {
     e.preventDefault();
     try {
-      console.log(editedTodo, "editedTodo");
       const updatedTodo = {
         title: editedTodo.title,
         description: editedTodo.description,
         due_date: editedTodo.due_date,
-        completed: editedTodo.completed,
+        completed: editedTodo.completed, // Ensure this field is included
       };
       await axios.put(
         `http://localhost:8000/todos/${editedTodo.id}`,
@@ -129,6 +125,7 @@ const App = () => {
       console.error(error);
     }
   };
+
   const handleCancel = () => {
     setEditMode(false);
     setShowModal(false);
@@ -401,4 +398,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Hero;
