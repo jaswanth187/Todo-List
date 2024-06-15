@@ -37,4 +37,4 @@ This is a full-stack To-Do List application built using React for the frontend a
 
 1. **Clone the Repository**: Clone this repository to your local machine.
    ```bash
-   git clone https://github.com/your-username/todo-app.git
+   git clone https://github.com/jaswanth187/Todo-List.git
